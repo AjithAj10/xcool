@@ -24,16 +24,25 @@ function App() {
     data: [],
   });
   useEffect(() => {
-    //const token = "1|FWItRXH5DCAN9rjBjIhfH9KMnprvKZweoK2Jfi5T";
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "https://xcool.in/api/test5m23",
+      headers: {
+        'token': '1|FWItRXH5DCAN9rjBjIhfH9KMnprvKZweoK2Jfi5T', 
+        'Authorization': 'Bearer 1|FWItRXH5DCAN9rjBjIhfH9KMnprvKZweoK2Jfi5T', 
+      },
+    };
 
     axios
-      .get("https://xcool.s3.ap-south-1.amazonaws.com/docs/test5m23.json")
-      .then((req: any) => {
-        console.log(req);
-        setData(req.data);
+      .request(config)
+      .then((response) => {
+        setData(response);
+        console.log(JSON.stringify(response.data));
       })
-
-      .catch(console.log);
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
   return (
     <Box>

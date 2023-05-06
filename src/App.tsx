@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Category from "./Category";
-
+import CircularProgress from "@mui/material/CircularProgress";
 
 function App() {
   const [data, setData] = useState<any>();
@@ -30,12 +30,12 @@ function App() {
       });
   }, []);
 
-
   return (
     <Box>
-      {data ?
+      {data ? (
         data.data &&
-        data.data.filter(
+        data.data
+          .filter(
             (music: { type: string; parentId: any }) =>
               music.type === "Category" && !music.parentId
           )
@@ -61,7 +61,13 @@ function App() {
                 <Category data={data} musicCard={musicCard} />
               </span>
             );
-          }) : <Typography variant="h4">Loading...</Typography>}
+          })
+      ) : (
+        <Box sx={{ display: "flex",flexDirection:'column',justifyContent:'center',alignItems:'center',height:'70vh' }}>
+          <CircularProgress />
+          <Typography variant="h4">Loading...</Typography>
+        </Box>
+      )}
     </Box>
   );
 }

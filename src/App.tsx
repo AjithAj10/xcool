@@ -36,7 +36,7 @@ function App() {
       .catch(console.log);
   }, []);
   return (
-    <div>
+    <Box>
       {data.data
         ?.filter(
           (music: { type: string; parentId: any }) =>
@@ -65,7 +65,7 @@ function App() {
             </span>
           );
         })}
-    </div>
+    </Box>
   );
 }
 
